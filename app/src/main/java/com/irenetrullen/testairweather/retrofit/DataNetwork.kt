@@ -7,7 +7,7 @@ object DataNetwork {
 
     val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://api.openweathermap.org/data/2.5/weather")
+            .baseUrl("http://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(TypicodeAPI::class.java)

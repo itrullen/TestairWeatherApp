@@ -1,9 +1,16 @@
 package com.irenetrullen.testairweather.model
 
-data class WeatherModel(val name: String,
-                        val username: String,
-                        val phone: String){
+import java.sql.Date
+import java.sql.Timestamp
+
+data class WeatherModel(
+    val name: String,
+    val weather: List<WeatherDescriptionModel>,
+    val main: WeatherMainModel,
+    val dt: Long
+) {
+
     override fun toString(): String {
-        return "$name ($username) - $phone"
+        return "${Date(Timestamp(dt*1000).time)} \n$name (${weather[0].description}) - ${main.temp} F"
     }
 }

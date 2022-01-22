@@ -15,5 +15,6 @@ class WeatherViewModel : ViewModel() {
         viewModelScope.launch {
             weatherModel.value = DataNetwork.retrofit.getWeather(city)
         }
+        //TODO: Exception Handling
     }
 }
