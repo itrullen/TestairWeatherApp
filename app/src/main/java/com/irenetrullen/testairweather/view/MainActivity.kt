@@ -1,5 +1,6 @@
 package com.irenetrullen.testairweather.view
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -31,10 +32,22 @@ class MainActivity : AppCompatActivity(), WeatherView {
         weatherViewModel.weatherModel.observe(this, { cityWeatherInfo ->
             loadCityWeather(cityWeatherInfo)
         })
+
+        weatherViewModel.weatherIcon.observe(this, { weatherIcon ->
+            loadWeatherIcon(weatherIcon)
+        })
     }
 
     override fun loadCityWeather(cityWeatherInfo: WeatherModel) {
+        //request for weather icon
+        weatherViewModel.getWeatherIcon(cityWeatherInfo.weather[0].icon)
+        //show weather info
         binding.lblYourResponseHere.text = cityWeatherInfo.toString()
+
+    }
+
+    override fun loadWeatherIcon(weatherIcon: Bitmap) {
+        binding.imageViewWeatherIcon.setImageBitmap(weatherIcon)
     }
 
     private fun setUpButtonListener() {
