@@ -11,7 +11,7 @@ class WeatherViewModel : ViewModel() {
 
     val weatherModel = MutableLiveData<WeatherModel>()
 
-    fun getWeather(city : String) {
+    fun getWeather(city: String) {
         viewModelScope.launch {
             weatherModel.value = DataNetwork.retrofit.getWeather(city)
         }

@@ -11,6 +11,5 @@ interface TypicodeAPI {
     suspend fun getWeather(
         @Query("q") city: String,
         @Query("appid") appid: String = "7587eaff3affbf8e56a81da4d6c51d06"
-    )
-            : WeatherModel?
+    ): WeatherModel
 }
