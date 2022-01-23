@@ -1,7 +1,8 @@
-package com.irenetrullen.testairweather.viewmodel
+package com.irenetrullen.testairweather.ui.home
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,8 +11,7 @@ import com.irenetrullen.testairweather.retrofit.DataNetwork
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 
-
-class WeatherViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
 
     val weatherModel = MutableLiveData<WeatherModel>()
     val weatherIcon = MutableLiveData<Bitmap>()
@@ -32,4 +32,6 @@ class WeatherViewModel : ViewModel() {
         }
         //TODO: Exception Handling
     }
+
+
 }
