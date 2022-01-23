@@ -1,4 +1,4 @@
-package com.irenetrullen.testairweather.view
+package com.irenetrullen.testairweather
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.irenetrullen.testairweather.databinding.ActivityMainBinding
 import com.irenetrullen.testairweather.model.WeatherModel
+import com.irenetrullen.testairweather.view.WeatherView
 import com.irenetrullen.testairweather.viewmodel.WeatherViewModel
 
 class MainActivity : AppCompatActivity(), WeatherView {
