@@ -6,8 +6,12 @@ import androidx.lifecycle.ViewModel
 
 class SearchViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
+    private val _text = MutableLiveData<String>()
+
     val text: LiveData<String> = _text
+
+    fun updateCityName(cityName: String){
+        _text.value = cityName
+    }
+
 }

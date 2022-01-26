@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.irenetrullen.testairweather.databinding.FragmentHomeBinding
+import com.irenetrullen.testairweather.model.SharedPreference
 import com.irenetrullen.testairweather.model.WeatherModel
 import com.irenetrullen.testairweather.view.WeatherView
 
@@ -33,20 +34,15 @@ class HomeFragment : Fragment(), WeatherView {
 
         setUpViewModel()
 
+        //Get weather from last city
+        context?.let { SharedPreference(it).getValueString("city")?.let { getWeather(it) } }
+
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setUpButtonListener()
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    private fun getWeather(city: String) {
-        homeViewModel.getWeather(city)
     }
 
     private fun setUpViewModel() {
@@ -59,18 +55,21 @@ class HomeFragment : Fragment(), WeatherView {
         })
     }
 
-    private fun setUpButtonListener() {
-
-        binding.btnSearch.setOnClickListener {
-            getWeather(binding.editTextSearch.text.toString())
-        }
+    private fun getWeather(city: String) {
+        homeViewModel.getWeather(city)
     }
 
     override fun loadCityWeather(cityWeatherInfo: WeatherModel) {
         //request for weather icon
+        //TODO: get weather icon for all weather list items
         homeViewModel.getWeatherIcon(cityWeatherInfo.weather[0].icon)
         //show weather info
-        binding.lblYourResponseHere.text = cityWeatherInfo.toString()
+        binding.lblCityName.text = cityWeatherInfo.name
+        //TODO: Format date text
+        binding.lblDate.text = cityWeatherInfo.dt.toString()
+        binding.lblTemperatureValue.text= cityWeatherInfo.main.temp.toString()
+        //TODO: print all elements list, not only weather[0]
+        binding.lblDescription.text = cityWeatherInfo.weather[0].description
     }
 
     override fun loadWeatherIcon(weatherIcon: Bitmap) {

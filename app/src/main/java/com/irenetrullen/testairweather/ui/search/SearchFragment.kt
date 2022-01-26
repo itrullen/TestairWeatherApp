@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.irenetrullen.testairweather.databinding.FragmentSearchBinding
+import com.irenetrullen.testairweather.model.SharedPreference
 
 class SearchFragment : Fragment() {
 
@@ -30,7 +31,7 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
+        val textView: TextView = binding.lblCityName
         searchViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
@@ -41,4 +42,26 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setUpButtonListener()
+    }
+
+    private fun setUpButtonListener() {
+
+        binding.btnSearch.setOnClickListener {
+            //save city preference
+            context?.let { it1 ->
+                SharedPreference(it1).save(
+                    "city",
+                    binding.editTextSearch.text.toString()
+                )
+            }
+            //TODO: replace with adding city element on grid
+            searchViewModel.updateCityName(binding.editTextSearch.text.toString())
+
+        }
+    }
+
+
 }
